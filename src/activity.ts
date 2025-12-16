@@ -142,7 +142,7 @@ async function details(idling: CONFIG_KEYS, editing: CONFIG_KEYS, debugging: CON
 
 		try {
 			raw = await fileDetails(raw, window.activeTextEditor.document, window.activeTextEditor.selection);
-		} catch (error) {
+		} catch (err) {
 			log(LogLevel.Error, `Failed to generate file details: ${error as string}`);
 		}
 
