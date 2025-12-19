@@ -79,7 +79,7 @@ export async function getGit() {
 
 		// eslint-disable-next-line require-atomic-updates
 		git = gitExtension?.exports.getAPI(1);
-	} catch (err) {
+	} catch (error) {
 		// eslint-disable-next-line require-atomic-updates
 		git = null;
 		log(LogLevel.Error, `Failed to load git extension, is git installed?; ${error as string}`);

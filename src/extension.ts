@@ -59,7 +59,7 @@ async function login() {
 
 	try {
 		await rpc.login();
-	} catch (err) {
+	} catch (error) {
 		log(LogLevel.Error, `Encountered following error while trying to login:\n${error as string}`);
 		cleanUp();
 		void rpc.destroy();
