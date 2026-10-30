@@ -77,7 +77,7 @@ const ASSIGNMENT =
     /[A-Za-z0-9_.-]*(?:password|passwd|pwd|secret|token|api[_-]?key|apikey|access[_-]?key|private[_-]?key|auth[_-]?key|client[_-]?secret)[A-Za-z0-9_.-]*["']?\s*(?::=|=>|[:=])\s*["'`]([^"'`\s]{16,})["'`]/gi;
 
 const SENSITIVE_FILES = [
-    { type: "env-file", test: (base) => /^\.env(\..+)?$/.test(base) && !/\.(example|sample|template|dist|defaults?)$/.test(base) },
+    { type: "env-file", test: (base) => /^\.env(\..+)?$|\.env$/.test(base) && !/\.(example|sample|template|dist|defaults?)$/.test(base) },
     { type: "private-key-file", test: (base) => /\.(pem|key|p12|pfx|jks|keystore)$/i.test(base) },
     { type: "private-key-file", test: (base) => /^id_(rsa|dsa|ecdsa|ed25519)(_.*)?$/.test(base) && !/\.pub$/.test(base) },
 ];
@@ -192,6 +192,7 @@ export function scanLine(line) {
     for (const m of line.matchAll(URL_PASSWORD)) {
         const pw = m[1];
         if (WEAK_PASSWORDS.has(pw.toLowerCase()) || looksPlaceholder(pw)) continue;
+        if (/^[{[(\\<$%@]/.test(pw) || /[\]\\]/.test(pw)) continue; // template syntax and regex fragments, not a password
         add("url-password", pw);
     }
 

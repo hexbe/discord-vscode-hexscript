@@ -47,3 +47,7 @@ The committed `.vsix` is a build artifact. Regenerate it rather than hand-editin
 - [ ] Any language-ID change matches what `hexscript-language-support` registers.
 - [ ] Change is HexScript-specific; unrelated fixes go upstream instead.
 - [ ] Used pnpm, and did not add a `package-lock.json`.
+
+## Secret scanning
+
+Secret scan: `.githooks/pre-commit` runs `scripts/secret-scan.mjs --staged` (private keys, API tokens, passwords in URLs, `.env`/key files); CI runs it over every push and PR range. Enable the hook once per clone with `git config core.hooksPath .githooks`; silence a false positive in `.secret-scan-allow` (with a reason), never with `--no-verify`.
