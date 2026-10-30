@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Keeps the SHA-pinned actions in .github/workflows current; the "# vX.Y.Z" comment after each SHA is updated too.
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"
+      - "/.github/pnpmCache"
+    schedule:
+      interval: "weekly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "ci"
