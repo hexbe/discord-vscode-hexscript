@@ -17,3 +17,8 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 tsconfig.eslint.json
 tsconfig.json
+AGENTS.md
+.secret-scan-allow
+scripts/**
+.githooks/**
+.claude/**
